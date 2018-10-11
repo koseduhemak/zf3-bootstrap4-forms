@@ -1,0 +1,36 @@
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.php-cs-fixer
+
+matrix:
+  include:
+    - php: 7.0
+      env:
+        - DEPENDENCIES="--prefer-stable"
+        - TEST_COVERAGE=true
+    - php: 7.1
+      env:
+        - DEPENDENCIES="--prefer-stable"
+        - TEST_COVERAGE=true
+    - php: 7.2
+      env:
+        - DEPENDENCIES="--prefer-stable"
+        - TEST_COVERAGE=true
+
+before_script:
+  - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
+  - travis_retry composer self-update
+  - composer update --prefer-source $DEPENDENCIES
+
+script:
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
+
+after_script:
+ - if [[ $TEST_COVERAGE == 'true' ]]; then composer upload-coverage ; fi
+
+after_success:
+  - if [[ $TEST_COVERAGE == 'true' ]]; then php vendor/bin/php-coveralls -v; fi
