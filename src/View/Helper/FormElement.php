@@ -16,9 +16,17 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
 
     protected $ignoredViewHelpers = [
         'radio',
-        'file',
-        'select'
+        'file'
     ];
+
+    public function __construct()
+    {
+        // TODO: in module config
+        $this->addClass(\Zf3Bootstrap4Forms\Form\Element\DateRange::class, 'formDateRange');
+
+        $this->addClass(\Zf3Bootstrap4Forms\Form\Element\Between::class, 'formBetween');
+    }
+
 
     public function render(ElementInterface $element)
     {

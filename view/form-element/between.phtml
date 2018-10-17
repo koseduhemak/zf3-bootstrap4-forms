@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @var \Zend\Form\Element $element
+ */
+if (is_null($this->fromElement) ||is_null($this->toElement))
+    throw new \Exception("Either one or both needed elements missing: Please add option key 'fromElement' and 'toElement' to according dateRange elements.");
+?>
+
+<div class="input-group">
+    <?php echo $this->formInput($this->fromElement); ?>
+    <div class="input-group-prepend input-group-append">
+        <div class="input-group-text">
+            <i class="fa fa-fw fa-arrows-h"></i>
+        </div>
+    </div>
+    <?php echo $this->formInput($this->toElement); ?>
+</div>
