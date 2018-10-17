@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * TODO:
+ * - Make options for js configurable
+ * - Include js library in module
+ */
+
+/**
  * @var \Zend\Form\Element $element
  */
 if (is_null($this->fromElement) || is_null($this->toElement))
@@ -10,11 +16,6 @@ if (is_null($this->fromElement) || is_null($this->toElement))
 $locale = $this->plugin('translate')->getTranslator()->getLocale();
 $jsLocale = strtolower(explode("_", $locale)[0]);
 
-// extract format
-#$format = $this->fromElement->getFormat();
-#$format = str_ireplace("Y", "yyyy", $format);
-#$format = str_ireplace("m", "mm", $format);
-#$format = str_ireplace("d", "dd", $format);
 ?>
 
 <div class="input-daterange input-group" data-date-today-btn="linked" data-date-language="de"
