@@ -27,6 +27,10 @@ return [
             'form_button' => View\Helper\FormButton::class,
             'formbutton' => View\Helper\FormButton::class,
 
+            'formSubmit' => View\Helper\FormButton::class,
+            'form_submit' => View\Helper\FormButton::class,
+            'formsubmit' => View\Helper\FormButton::class,
+
             'formCheckbox' => View\Helper\FormCheckbox::class,
             'form_checkbox' => View\Helper\FormCheckbox::class,
             'formcheckbox' => View\Helper\FormCheckbox::class,

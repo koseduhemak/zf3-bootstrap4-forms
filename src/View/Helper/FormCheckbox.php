@@ -6,85 +6,54 @@ use Zend\Form\Element\Checkbox;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Checkbox as CheckboxElement;
 use Zend\Form\Exception;
+use Zend\Form\View\Helper\FormLabel;
 use Zend\Form\View\Helper\FormRow;
 
 class FormCheckbox extends \Zend\Form\View\Helper\FormCheckbox
 {
+    protected $labelHelper;
+
     public function render(ElementInterface $element)
     {
-        if (! $element instanceof CheckboxElement) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s requires that the element is of type Zend\Form\Element\Checkbox',
-                __METHOD__
-            ));
+        if (!preg_match('/(^|[^a-z]+)form-check-input($|[^a-z-]+)/i', $element->getAttribute('class'))) {
+            $element->setAttribute('class', trim('form-check-input '.$element->getAttribute('class')));
         }
 
-        $name = $element->getName();
-        if (empty($name) && $name !== 0) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an assigned name; none discovered',
-                __METHOD__
-            ));
+        $labelAtributes = $element->getOption('label_attributes') ?: [];
+        if (!is_array($labelAtributes) || !array_key_exists('class', $labelAtributes) || !preg_match('/(^|[^a-z]+)form-check-label($|[^a-z-]+)/i', $labelAtributes['class'])) {
+            $labelAtributes['class'] = array_key_exists('class', $labelAtributes) ? $labelAtributes['class'] : '';
+            $labelAtributes["class"] = $labelAtributes['class'].trim(' form-check-label');
         }
 
-        $attributes            = $element->getAttributes();
-        $attributes['name']    = $name;
-        $attributes['type']    = $this->getInputType();
-        $attributes['value']   = $element->getCheckedValue();
-        $closingBracket        = $this->getInlineClosingBracket();
+        $elementMarkup = parent::render($element);
 
-        if ($element->isChecked()) {
-            $attributes['checked'] = 'checked';
-        }
+        $label = $this->getLabelHelper()->__invoke($element);
 
-        $rendered = sprintf(
-            '<input %s%s',
-            $this->createAttributesString($attributes),
-            $closingBracket
-        );
+        $markup = '<div class="form-check">%s%s</div>';
 
-        /*// Add label markup
-        $sLabelOpen = $sLabelClose = '';
-        $sLabelContent = $this->getLabelContent($element);
-        if($sLabelContent) {
-            $oLabelHelper = $this->getLabelHelper();
-            $sLabelOpen = $oLabelHelper->openTag($oElement->getLabelAttributes() ? : null);
-            $sLabelClose = $oLabelHelper->closeTag();
-        }
+        $markup = sprintf($markup, $elementMarkup, $label);
 
-        if ($this->getLabelPosition($element) === FormRow::LABEL_PREPEND) {
-            $sElementContent = $sLabelOpen .
-                ($sLabelContent ? rtrim($sLabelContent) . ' ' : '') .
-                $sElementContent .
-                $sLabelClose;
-        } else {
-            $sElementContent = $sLabelOpen .
-                $sElementContent .
-                ($sLabelContent ? ' ' . ltrim($sLabelContent) : '') .
-                $sLabelClose;
-        }*/
-
-
-        if ($element->useHiddenElement()) {
-            $hiddenAttributes = [
-                'disabled' => isset($attributes['disabled']) ? $attributes['disabled'] : false,
-                'name'     => $attributes['name'],
-                'value'    => $element->getUncheckedValue(),
-            ];
-
-            $rendered = sprintf(
-                    '<input type="hidden" %s%s',
-                    $this->createAttributesString($hiddenAttributes),
-                    $closingBracket
-                ) . $rendered;
-        }
-
-        return $rendered;
+        return $markup;
     }
 
-    public function getLabelPosition(Checkbox $oElement)
+    /**
+     * Retrieve the FormLabel helper
+     * @return FormLabel
+     */
+    protected function getLabelHelper()
     {
-        return $oElement->getLabelOption('position')? : FormRow::LABEL_APPEND;
+        if ($this->labelHelper) {
+            return $this->labelHelper;
+        }
+        if (method_exists($this->view, 'plugin')) {
+            $this->labelHelper = $this->view->plugin('form_label');
+        }
+        if (!($this->labelHelper instanceof FormLabel)) {
+            $this->labelHelper = new FormLabel();
+        }
+        if ($this->hasTranslator()) {
+            $this->labelHelper->setTranslator($this->getTranslator(), $this->getTranslatorTextDomain());
+        }
+        return $this->labelHelper;
     }
-
 }

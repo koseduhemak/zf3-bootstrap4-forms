@@ -16,7 +16,10 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
 
     protected $ignoredViewHelpers = [
         'radio',
-        'file'
+        'checkbox',
+        'file',
+        'button',
+        'submit'
     ];
 
     public function __construct()
