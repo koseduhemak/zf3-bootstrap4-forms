@@ -12,6 +12,7 @@ return [
             View\Helper\FormRowHorizontal::class => InvokableFactory::class,
             View\Helper\FormElement::class => InvokableFactory::class,
             View\Helper\FormLabel::class => InvokableFactory::class,
+            View\Helper\FormSelect::class => InvokableFactory::class,
             View\Helper\FormButton::class => InvokableFactory::class,
             View\Helper\FormCheckbox::class => InvokableFactory::class,
             View\Helper\DateRange::class => InvokableFactory::class,
@@ -35,6 +36,10 @@ return [
             'formLabel' => View\Helper\FormLabel::class,
             'form_label' => View\Helper\FormLabel::class,
             'formlabel' => View\Helper\FormLabel::class,
+
+            'formSelect' => View\Helper\FormSelect::class,
+            'form_select' => View\Helper\FormSelect::class,
+            'formselect' => View\Helper\FormSelect::class,
 
             'formButton' => View\Helper\FormButton::class,
             'form_button' => View\Helper\FormButton::class,
