@@ -7,21 +7,34 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     'view_helpers' => [
         'factories' => [
+            View\Helper\Form::class => InvokableFactory::class,
             View\Helper\FormRow::class => InvokableFactory::class,
+            View\Helper\FormRowHorizontal::class => InvokableFactory::class,
             View\Helper\FormElement::class => InvokableFactory::class,
+            View\Helper\FormLabel::class => InvokableFactory::class,
             View\Helper\FormButton::class => InvokableFactory::class,
             View\Helper\FormCheckbox::class => InvokableFactory::class,
             View\Helper\DateRange::class => InvokableFactory::class,
             View\Helper\Between::class => InvokableFactory::class,
         ],
         'aliases' => [
+            'form' => View\Helper\Form::class,
+
             'formRow' => View\Helper\FormRow::class,
             'form_row' => View\Helper\FormRow::class,
             'formrow' => View\Helper\FormRow::class,
 
+            'formRowHorizontal' => View\Helper\FormRowHorizontal::class,
+            'form_row_horizontal' => View\Helper\FormRowHorizontal::class,
+            'formrowhorizontal' => View\Helper\FormRowHorizontal::class,
+
             'formElement' => View\Helper\FormElement::class,
             'form_element' => View\Helper\FormElement::class,
             'formelement' => View\Helper\FormElement::class,
+
+            'formLabel' => View\Helper\FormLabel::class,
+            'form_label' => View\Helper\FormLabel::class,
+            'formlabel' => View\Helper\FormLabel::class,
 
             'formButton' => View\Helper\FormButton::class,
             'form_button' => View\Helper\FormButton::class,

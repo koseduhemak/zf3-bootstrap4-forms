@@ -36,7 +36,7 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
         $type = $element->getAttribute('type');
 
         // if not ignored or contains class selectpicker (renderer is compatible with: https://developer.snapappointments.com/bootstrap-select/)
-        if (!in_array($type, $this->ignoredViewHelpers) && !preg_match('/\Wselectpicker\W/', $element->getAttribute('class'))) {
+        if (!in_array($type, $this->ignoredViewHelpers) && !preg_match('/(^| )selectpicker($| )/', $element->getAttribute('class')) && !preg_match('/(^| )form-control($| )/', $element->getAttribute('class'))) {
             $element->setAttribute('class', trim($element->getAttribute('class') . ' form-control'));
         }
 

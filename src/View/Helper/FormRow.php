@@ -4,12 +4,11 @@ namespace Zf3Bootstrap4Forms\View\Helper;
 
 
 use Zend\Form\Element\Button;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Submit;
-use Zend\Form\Element\MonthSelect;
 use Zend\Form\Element\Captcha;
+use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\MonthSelect;
+use Zend\Form\Element\Submit;
 use Zend\Form\ElementInterface;
-use Zend\Form\Exception;
 use Zend\Form\LabelAwareInterface;
 
 class FormRow extends \Zend\Form\View\Helper\FormRow
@@ -21,12 +20,12 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
             $element->setLabelOption('label_position', $element->getLabelOption('label_position') ?: \Zend\Form\View\Helper\FormRow::LABEL_APPEND);
         }
 
-        $escapeHtmlHelper    = $this->getEscapeHtmlHelper();
-        $labelHelper         = $this->getLabelHelper();
-        $elementHelper       = $this->getElementHelper();
+        $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+        $labelHelper = $this->getLabelHelper();
+        $elementHelper = $this->getElementHelper();
         $elementErrorsHelper = $this->getElementErrorsHelper();
 
-        $label           = $element->getLabel();
+        $label = $element->getLabel();
         $inputErrorClass = $this->getInputErrorClass();
 
         if (is_null($labelPosition)) {
@@ -50,11 +49,11 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
 
         if ($this->partial) {
             $vars = [
-                'element'           => $element,
-                'label'             => $label,
-                'labelAttributes'   => $this->labelAttributes,
-                'labelPosition'     => $labelPosition,
-                'renderErrors'      => $this->renderErrors,
+                'element' => $element,
+                'label' => $label,
+                'labelAttributes' => $this->labelAttributes,
+                'labelPosition' => $labelPosition,
+                'renderErrors' => $this->renderErrors,
             ];
 
             return $this->view->render($this->partial, $vars);
@@ -75,7 +74,7 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                 $labelAttributes = $element->getLabelAttributes();
             }
 
-            if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
+            if (!$element instanceof LabelAwareInterface || !$element->getLabelOption('disable_html_escape')) {
                 $label = $escapeHtmlHelper($label);
             }
 
@@ -99,17 +98,17 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                 // Ensure element and label will be separated if element has an `id`-attribute.
                 // If element has label option `always_wrap` it will be nested in any case.
                 if ($element->hasAttribute('id')
-                    && ($element instanceof LabelAwareInterface && ! $element->getLabelOption('always_wrap'))
+                    && ($element instanceof LabelAwareInterface && !$element->getLabelOption('always_wrap'))
                 ) {
                     $labelOpen = '';
                     $labelClose = '';
                     $label = $labelHelper->openTag($element) . $label . $labelHelper->closeTag();
                 } else {
-                    $labelOpen  = $labelHelper->openTag($labelAttributes);
+                    $labelOpen = $labelHelper->openTag($labelAttributes);
                     $labelClose = $labelHelper->closeTag();
                 }
 
-                if ($label !== '' && (! $element->hasAttribute('id'))
+                if ($label !== '' && (!$element->hasAttribute('id'))
                     || ($element instanceof LabelAwareInterface && $element->getLabelOption('always_wrap'))
                 ) {
                     $label = '<span>' . $label . '</span>';
@@ -124,15 +123,29 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                     $labelPosition = $element->getLabelOption('label_position');
                 }
 
+                if ($element->getOption('formType') === Form::TYPE_HORIZONTAL && $element->getOption('column-size')) {
+                    $elementString = sprintf('<div class="col-%s">%s</div>', $element->getOption('column-size'), $elementString);
+                }
+
                 switch ($labelPosition) {
-                    case self::LABEL_PREPEND:
-                        $markup = $labelOpen . $label . $elementString . $labelClose;
-                        break;
                     case self::LABEL_APPEND:
-                    default:
                         $markup = $labelOpen . $elementString . $label . $labelClose;
                         break;
+                    case self::LABEL_PREPEND:
+                    default:
+                        $markup = $labelOpen . $label . $elementString . $labelClose;
+                        break;
                 }
+
+                // add form-group wrapper
+                if ($element->getOption('formType') === Form::TYPE_HORIZONTAL) {
+                    $html = '<div class="form-group row">%s</div>';
+                } else {
+                    $html = '<div class="form-group">%s</div>';
+                }
+
+
+                $markup = sprintf($html, $markup);
             }
 
             if ($this->renderErrors) {
