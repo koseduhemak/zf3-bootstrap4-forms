@@ -2,6 +2,8 @@
 
 namespace Zf3Bootstrap4Forms\View\Helper;
 
+use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\Radio;
 use Zend\Form\ElementInterface;
 
 class FormLabel extends \Zend\Form\View\Helper\FormLabel
@@ -11,11 +13,13 @@ class FormLabel extends \Zend\Form\View\Helper\FormLabel
         if ($element->getOption('formType') === Form::TYPE_HORIZONTAL) {
             $labelAttributes = $element->getAttributes();
 
-            if (!array_key_exists('class', $labelAttributes) || !preg_match('/(^| )col-form-label($| )/', $labelAttributes['class'])) {
-                $class = array_key_exists('class', $labelAttributes) ? $labelAttributes['class'] : '';
-                $class .= ' col-form-label';
-                $labelAttributes['class'] = trim($class);
-                $element->setLabelAttributes($labelAttributes);
+            if (!$element instanceof Checkbox && !$element instanceof Radio) {
+                if (!array_key_exists('class', $labelAttributes) || !preg_match('/(^| )col-form-label($| )/', $labelAttributes['class'])) {
+                    $class = array_key_exists('class', $labelAttributes) ? $labelAttributes['class'] : '';
+                    $class .= ' col-form-label';
+                    $labelAttributes['class'] = trim($class);
+                    $element->setLabelAttributes($labelAttributes);
+                }
             }
         }
 
