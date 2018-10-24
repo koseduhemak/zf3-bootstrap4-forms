@@ -29,7 +29,15 @@ class FormCheckbox extends \Zend\Form\View\Helper\FormCheckbox
 
         $label = $this->getLabelHelper()->__invoke($element);
 
-        $markup = '<div class="form-check">%s%s</div>';
+        /**
+         * @SEE https://www.bootstraptoggle.com/
+         * do only add form-check class if not toggler element.
+         */
+        if (!$element->getAttribute('data-toggle')) {
+            $markup = '<div class="form-check">%s%s</div>';
+        } else {
+            $markup = '%s%s';
+        }
 
         $markup = sprintf($markup, $elementMarkup, $label);
 
