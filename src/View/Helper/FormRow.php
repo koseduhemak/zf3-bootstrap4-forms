@@ -82,6 +82,13 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                 $labelAttributes = $this->labelAttributes;
             }
 
+            // add form-group wrapper
+            if ($element->getOption('formType') === Form::TYPE_HORIZONTAL) {
+                $formGroupHtml = '<div class="form-group row">%s</div>';
+            } else {
+                $formGroupHtml = '<div class="form-group">%s</div>';
+            }
+
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
             // labels. The semantic way is to group them inside a fieldset
             if ($type === 'multi_checkbox'
@@ -89,6 +96,7 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                 || $element instanceof MonthSelect
                 || $element instanceof Captcha
             ) {
+                $elementString = sprintf($formGroupHtml, $elementString);
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,
@@ -137,15 +145,7 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                         break;
                 }
 
-                // add form-group wrapper
-                if ($element->getOption('formType') === Form::TYPE_HORIZONTAL) {
-                    $html = '<div class="form-group row">%s</div>';
-                } else {
-                    $html = '<div class="form-group">%s</div>';
-                }
-
-
-                $markup = sprintf($html, $markup);
+                $markup = sprintf($formGroupHtml, $markup);
             }
 
             if ($this->renderErrors) {
