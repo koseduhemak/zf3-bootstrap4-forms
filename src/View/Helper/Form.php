@@ -11,10 +11,17 @@ class Form extends \Zend\Form\View\Helper\Form
 
     public function __invoke(FormInterface $form = null, $type = null)
     {
+        // render elemnts and fieldsets accordingly
         if ($type === static::TYPE_HORIZONTAL) {
+            // elements
             /** @var Element $element */
             foreach ($form->getElements() as $element) {
-                $element->setOption('formType', static::TYPE_HORIZONTAL);
+                $element->setOption('formType', $type);
+            }
+
+            // fieldsets
+            foreach ($form->getFieldsets() as $fieldset) {
+                $fieldset->setOption('formType', $type);
             }
         }
 

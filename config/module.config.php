@@ -8,6 +8,7 @@ return [
     'view_helpers' => [
         'factories' => [
             View\Helper\Form::class => InvokableFactory::class,
+            View\Helper\FormCollection::class => InvokableFactory::class,
             View\Helper\FormRow::class => InvokableFactory::class,
             View\Helper\FormRowHorizontal::class => InvokableFactory::class,
             View\Helper\FormElement::class => InvokableFactory::class,
@@ -21,6 +22,10 @@ return [
         ],
         'aliases' => [
             'form' => View\Helper\Form::class,
+
+            'formCollection' => View\Helper\FormCollection::class,
+            'form_collection' => View\Helper\FormCollection::class,
+            'formcollection' => View\Helper\FormCollection::class,
 
             'formRow' => View\Helper\FormRow::class,
             'form_row' => View\Helper\FormRow::class,
