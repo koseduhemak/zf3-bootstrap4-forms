@@ -10,7 +10,7 @@ class FormRowHorizontal extends FormRow
 {
     public function render(ElementInterface $element, $labelPosition = null)
     {
-        $element->setOption('formType', Form::TYPE_HORIZONTAL);
+        $element->setOption('formLayout', Form::LAYOUT_HORIZONTAL);
 
         $labelAttributes = $element->getLabelAttributes();
 

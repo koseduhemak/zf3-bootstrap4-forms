@@ -12,8 +12,10 @@ return [
             View\Helper\FormRow::class => InvokableFactory::class,
             View\Helper\FormRowHorizontal::class => InvokableFactory::class,
             View\Helper\FormElement::class => InvokableFactory::class,
+            View\Helper\FormInput::class => InvokableFactory::class,
             View\Helper\FormLabel::class => InvokableFactory::class,
             View\Helper\FormErrors::class => InvokableFactory::class,
+            View\Helper\FormElementErrors::class => InvokableFactory::class,
             View\Helper\FormSelect::class => InvokableFactory::class,
             View\Helper\FormButton::class => InvokableFactory::class,
             View\Helper\FormCheckbox::class => InvokableFactory::class,
@@ -39,6 +41,10 @@ return [
             'form_element' => View\Helper\FormElement::class,
             'formelement' => View\Helper\FormElement::class,
 
+            'formInput' => View\Helper\FormInput::class,
+            'form_input' => View\Helper\FormInput::class,
+            'forminput' => View\Helper\FormInput::class,
+
             'formLabel' => View\Helper\FormLabel::class,
             'form_label' => View\Helper\FormLabel::class,
             'formlabel' => View\Helper\FormLabel::class,
@@ -46,6 +52,10 @@ return [
             'formErrors' => View\Helper\FormErrors::class,
             'form_errors' => View\Helper\FormErrors::class,
             'formerrors' => View\Helper\FormErrors::class,
+
+            'formElementErrors' => View\Helper\FormElementErrors::class,
+            'form_element_errors' => View\Helper\FormElementErrors::class,
+            'formelementerrors' => View\Helper\FormElementErrors::class,
 
             'formSelect' => View\Helper\FormSelect::class,
             'form_select' => View\Helper\FormSelect::class,

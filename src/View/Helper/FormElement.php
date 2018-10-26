@@ -40,6 +40,12 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
             $element->setAttribute('class', trim($element->getAttribute('class') . ' form-control'));
         }
 
+        if ($element->getMessages()) {
+            if (!preg_match('/(^| )is-invalid($| )/', $element->getAttribute('class'))) {
+                $element->setAttribute('class', trim($element->getAttribute('class') . ' is-invalid'));
+            }
+        }
+
         $markup = parent::render($element);
 
         // render helpBlock
@@ -55,7 +61,8 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
 
     public function renderInputGroup(ElementInterface $element, $elementMarkup)
     {
-        $newMarkup = '<div class="input-group mb-3">';
+        $newMarkup = '<div class="form-group">';
+        $newMarkup .= '<div class="input-group">';
 
         $addonPrepend = $element->getOption(static::ADDON_PREPEND);
         $addonAppend = $element->getOption(static::ADDON_APPEND);
@@ -75,7 +82,10 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
                 $newMarkup .= $elementMarkupAppend;
             }
 
-            $elementMarkup = $newMarkup . '</div>';
+            $newMarkup .= '</div>';
+            $newMarkup .= '</div>';
+
+            $elementMarkup = $newMarkup;
         }
 
         return $elementMarkup;

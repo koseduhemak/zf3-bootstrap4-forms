@@ -10,7 +10,7 @@ class FormLabel extends \Zend\Form\View\Helper\FormLabel
 {
     public function __invoke(ElementInterface $element = null, $labelContent = null, $position = null)
     {
-        if ($element->getOption('formType') === Form::TYPE_HORIZONTAL) {
+        if ($element->getOption('formLayout') === Form::LAYOUT_HORIZONTAL) {
             $labelAttributes = $element->getAttributes();
 
             if (!$element instanceof Checkbox && !$element instanceof Radio) {

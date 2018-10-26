@@ -7,21 +7,27 @@ use Zend\Form\FormInterface;
 
 class Form extends \Zend\Form\View\Helper\Form
 {
-    const TYPE_HORIZONTAL = 'horizontal';
+    const LAYOUT_HORIZONTAL = 'horizontal';
+    const LAYOUT_FLOATING_LABLES = 'floating-labels';
+
+    protected $layouts = [
+        self::LAYOUT_FLOATING_LABLES,
+        self::LAYOUT_HORIZONTAL
+    ];
 
     public function __invoke(FormInterface $form = null, $type = null)
     {
         // render elemnts and fieldsets accordingly
-        if ($type === static::TYPE_HORIZONTAL) {
+        if (in_array($type, $this->layouts)) {
             // elements
             /** @var Element $element */
             foreach ($form->getElements() as $element) {
-                $element->setOption('formType', $type);
+                $element->setOption('formLayout', $type);
             }
 
             // fieldsets
             foreach ($form->getFieldsets() as $fieldset) {
-                $fieldset->setOption('formType', $type);
+                $fieldset->setOption('formLayout', $type);
             }
         }
 

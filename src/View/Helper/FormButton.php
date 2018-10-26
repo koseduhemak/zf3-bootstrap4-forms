@@ -24,12 +24,12 @@ class FormButton extends \Zend\Form\View\Helper\FormButton
         }
 
         // add btn class
-        if (! preg_match('/(^|[^a-z]+)btn($|[^a-z-]+)/i', $element->getAttribute('class'))) {
-            $element->setAttribute('class', trim('btn ' . $element->getAttribute('class')));
+        if (! preg_match('/(^|[^a-z]+)btn-($|[^a-z]+)/i', $element->getAttribute('class'))) {
+            $element->setAttribute('class', 'btn-primary '.trim($element->getAttribute('class')));
         }
 
-        if (! preg_match('/(^|[^a-z]+)btn-($|[^a-z]+)/i', $element->getAttribute('class'))) {
-            $element->setAttribute('class', trim($element->getAttribute('class') . ' btn-primary'));
+        if (! preg_match('/(^|[^a-z]+)btn($|[^a-z-]+)/i', $element->getAttribute('class'))) {
+            $element->setAttribute('class', trim('btn ' . $element->getAttribute('class')));
         }
 
         if ($fontAwesome = $element->getOption('fontawesome')) {

@@ -9,15 +9,15 @@ class FormCollection extends \Zend\Form\View\Helper\FormCollection
     public function __invoke(ElementInterface $element = null, $wrap = true)
     {
         // render elemnts and fieldsets accordingly
-        if ($element->getOption('formType', Form::TYPE_HORIZONTAL)) {
+        if ($formLayout = $element->getOption('formLayout')) {
             // elements
             foreach ($element->getElements() as $fieldsetElement) {
-                $fieldsetElement->setOption('formType', Form::TYPE_HORIZONTAL);
+                $fieldsetElement->setOption('formLayout', $formLayout);
             }
 
             // fieldsets
             foreach ($element->getFieldsets() as $fieldsetFieldset) {
-                $fieldsetFieldset->setOption('formType', Form::TYPE_HORIZONTAL);
+                $fieldsetFieldset->setOption('formLayout', $formLayout);
             }
         }
 

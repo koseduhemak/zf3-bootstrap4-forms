@@ -13,12 +13,17 @@ use Zend\Form\LabelAwareInterface;
 
 class FormRow extends \Zend\Form\View\Helper\FormRow
 {
+    protected $inputErrorClass = 'is-invalid';
+
     public function render(ElementInterface $element, $labelPosition = null)
     {
         if ($element instanceof Checkbox) {
             // default label to append
             $element->setLabelOption('label_position', $element->getLabelOption('label_position') ?: \Zend\Form\View\Helper\FormRow::LABEL_APPEND);
         }
+
+        // get form layout
+        $formLayout = $element->getOption('formLayout');
 
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $labelHelper = $this->getLabelHelper();
@@ -83,10 +88,15 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
             }
 
             // add form-group wrapper
-            if ($element->getOption('formType') === Form::TYPE_HORIZONTAL) {
+            if ($formLayout === Form::LAYOUT_HORIZONTAL) {
                 $formGroupHtml = '<div class="form-group row">%s</div>';
             } else {
                 $formGroupHtml = '<div class="form-group">%s</div>';
+            }
+
+            // render errors
+            if ($this->renderErrors && isset($elementErrors)) {
+                $formGroupHtml = sprintf($formGroupHtml, '%s'.$elementErrors);
             }
 
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
@@ -131,8 +141,12 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                     $labelPosition = $element->getLabelOption('label_position');
                 }
 
-                if ($element->getOption('formType') === Form::TYPE_HORIZONTAL && $element->getOption('column-size')) {
+                if ($formLayout === Form::LAYOUT_HORIZONTAL && $element->getOption('column-size')) {
                     $elementString = sprintf('<div class="col-%s">%s</div>', $element->getOption('column-size'), $elementString);
+                }
+
+                if ($formLayout === Form::LAYOUT_FLOATING_LABLES) {
+                    $labelPosition = self::LABEL_APPEND;
                 }
 
                 switch ($labelPosition) {
@@ -146,10 +160,6 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                 }
 
                 $markup = sprintf($formGroupHtml, $markup);
-            }
-
-            if ($this->renderErrors) {
-                $markup .= $elementErrors;
             }
         } else {
             if ($this->renderErrors) {
