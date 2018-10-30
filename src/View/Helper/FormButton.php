@@ -15,6 +15,11 @@ class FormButton extends \Zend\Form\View\Helper\FormButton
         if (null === $buttonContent) {
             $buttonContent = $element->getLabel();
 
+            // if no label check value for label
+            if (null === $buttonContent) {
+                $buttonContent = $element->getValue();
+            }
+
             if (null !== $buttonContent && null !== ($translator = $this->getTranslator())) {
                 $buttonContent = $translator->translate(
                     $buttonContent,

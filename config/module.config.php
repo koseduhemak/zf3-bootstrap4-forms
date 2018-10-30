@@ -19,6 +19,7 @@ return [
             View\Helper\FormSelect::class => InvokableFactory::class,
             View\Helper\FormButton::class => InvokableFactory::class,
             View\Helper\FormCheckbox::class => InvokableFactory::class,
+            View\Helper\FormPassword::class => InvokableFactory::class,
             View\Helper\DateRange::class => InvokableFactory::class,
             View\Helper\Between::class => InvokableFactory::class,
         ],
@@ -73,6 +74,10 @@ return [
             'form_checkbox' => View\Helper\FormCheckbox::class,
             'formcheckbox' => View\Helper\FormCheckbox::class,
 
+            'formPassword' => View\Helper\FormPassword::class,
+            'form_password' => View\Helper\FormPassword::class,
+            'formpassword' => View\Helper\FormPassword::class,
+
             'form_date_range' => View\Helper\DateRange::class,
             'formDateRange' => View\Helper\DateRange::class,
             'formdaterange' => View\Helper\DateRange::class,
@@ -80,11 +85,18 @@ return [
             'form_between' => View\Helper\Between::class,
             'formBetween' => View\Helper\Between::class,
             'formbetween' => View\Helper\Between::class,
-        ]
+        ],
     ],
     'view_manager' => [
         'template_path_stack' => [
-            __DIR__ . '/../view'
+            __DIR__ . '/../view',
         ],
-    ]
+    ],
+    'asset_manager' => [
+        'resolver_configs' => [
+            'paths' => [
+                __DIR__ . '/../assets',
+            ],
+        ],
+    ],
 ];

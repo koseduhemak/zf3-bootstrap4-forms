@@ -8,7 +8,7 @@ use Zend\Form\FormInterface;
 class Form extends \Zend\Form\View\Helper\Form
 {
     const LAYOUT_HORIZONTAL = 'horizontal';
-    const LAYOUT_FLOATING_LABLES = 'floating-labels';
+    const LAYOUT_FLOATING_LABLES = 'form-floating-labels';
 
     protected $layouts = [
         self::LAYOUT_FLOATING_LABLES,
@@ -28,6 +28,19 @@ class Form extends \Zend\Form\View\Helper\Form
             // fieldsets
             foreach ($form->getFieldsets() as $fieldset) {
                 $fieldset->setOption('formLayout', $type);
+            }
+
+            // add class to form
+            if ($form->getAttributes('class')) {
+                if (!preg_match('/(^| )'.preg_quote($type).'($| )/', $form->getAttribute('class'))) {
+                    $form->setAttribute('class', trim($type.' '.$form->getAttribute('class')));
+                }
+            } else {
+                $form->setAttribute('class', $type);
+            }
+
+            if ($type === static::LAYOUT_FLOATING_LABLES) {
+                $this->getView()->headLink()->prependStylesheet('/css/form/bootstrap-floating-labels.css');
             }
         }
 
