@@ -99,4 +99,7 @@ form.display-required input.form-control:required, form.display-required textare
 form.display-required input.form-control:invalid, form.display-required textarea.form-control:invalid, form.display-required div.bootstrap-select button.invalid, form.display-required select.form-control:invalid {
   border-left-color: #ec1e23; }
 
+form.display-required div.invalid-feedback {
+  margin-left: 6px; }
+
 /*# sourceMappingURL=main.css.map */

@@ -9,7 +9,7 @@ use Zend\Form\ElementInterface;
 class FormElementErrors extends \Zend\Form\View\Helper\FormElementErrors
 {
     protected $messageOpenFormat = '<div%s>';
-    protected $messageSeparatorString = '';
+    protected $messageSeparatorString = '.<br>';
     protected $messageCloseString = '</div>';
 
     protected $attributes = [
