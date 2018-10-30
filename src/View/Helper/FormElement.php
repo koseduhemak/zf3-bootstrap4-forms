@@ -48,13 +48,13 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
 
         $markup = parent::render($element);
 
+        // render input group
+        $markup = $this->renderInputGroup($element, $markup);
+
         // render helpBlock
         if ($element->getOption('help-block')) {
             $markup .= sprintf('<small id="passwordHelpBlock" class="form-text text-muted">%s</small>', $element->getOption('help-block'));
         }
-
-        // render input group
-        $markup = $this->renderInputGroup($element, $markup);
 
         return $markup;
     }

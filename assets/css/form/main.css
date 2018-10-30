@@ -102,4 +102,7 @@ form.display-required input.form-control:invalid, form.display-required textarea
 form.display-required div.invalid-feedback {
   margin-left: 6px; }
 
+.form-check ~ .invalid-feedback {
+  display: block; }
+
 /*# sourceMappingURL=main.css.map */
