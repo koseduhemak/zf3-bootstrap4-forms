@@ -40,7 +40,7 @@ class Form extends \Zend\Form\View\Helper\Form
             }
 
             if ($type === static::LAYOUT_FLOATING_LABLES) {
-                $this->getView()->headLink()->prependStylesheet('/css/form/bootstrap-floating-labels.css');
+                $this->getView()->headLink()->prependStylesheet('/css/form/main.css');
             }
         }
 
