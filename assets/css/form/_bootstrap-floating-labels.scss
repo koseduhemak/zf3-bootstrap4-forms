@@ -8,17 +8,16 @@
   margin-bottom: 1rem;
 }
 
-.form-floating-labels .form-group > input,
-.form-floating-labels .form-group > label {
+.form-floating-labels .form-group > input, .form-floating-labels .form-group > .input-group > input,
+.form-floating-labels .form-group > label, .form-floating-labels .form-group > .input-group > label {
   padding: var(--input-padding-y) var(--input-padding-x);
 }
 
-.form-floating-labels .form-group > label {
+.form-floating-labels .form-group > label, .form-floating-labels .form-group > .input-group > label {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
   display: block;
-  width: 100%;
   margin-bottom: 0; /* Override default `<label>` margin */
   line-height: 1.5;
   color: #888888;
@@ -29,7 +28,7 @@
   z-index: 999;
 }
 
-.form-floating-labels.display-required .form-group > label {
+.form-floating-labels.display-required .form-group > label, .form-floating-labels.display-required .form-group > .input-group > label {
   margin-left: 6px;
 }
 
@@ -40,32 +39,32 @@ form.form-floating-labels .form-control {
   border-radius: 0;
 }
 
-.form-floating-labels .form-group > input::-webkit-input-placeholder {
+.form-floating-labels .form-group > input::-webkit-input-placeholder, .form-floating-labels .form-group > .input-group > input::-webkit-input-placeholder {
   color: transparent;
 }
 
-.form-floating-labels .form-group > input:-ms-input-placeholder {
+.form-floating-labels .form-group > input:-ms-input-placeholder, .form-floating-labels .form-group > .input-group > input:-ms-input-placeholder {
   color: transparent;
 }
 
-.form-floating-labels .form-group > input::-ms-input-placeholder {
+.form-floating-labels .form-group > input::-ms-input-placeholder, .form-floating-labels .form-group > .input-group > input::-ms-input-placeholder {
   color: transparent;
 }
 
-.form-floating-labels .form-group > input::-moz-placeholder {
+.form-floating-labels .form-group > input::-moz-placeholder, .form-floating-labels .form-group > .input-group > input::-moz-placeholder {
   color: transparent;
 }
 
-.form-floating-labels .form-group > input::placeholder {
+.form-floating-labels .form-group > input::placeholder, .form-floating-labels .form-group > .input-group > input::placeholder {
   color: transparent;
 }
 
-.form-floating-labels .form-group > input:not(:placeholder-shown) {
+.form-floating-labels .form-group > input:not(:placeholder-shown), .form-floating-labels .form-group > .input-group > input:not(:placeholder-shown) {
   padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
   padding-bottom: calc(var(--input-padding-y) / 3);
 }
 
-.form-floating-labels .form-group > input:not(:placeholder-shown) ~ label {
+.form-floating-labels .form-group > input:not(:placeholder-shown) ~ label, .form-floating-labels .form-group > .input-group > input:not(:placeholder-shown) ~ label {
   padding-top: calc(var(--input-padding-y) / 3);
   padding-bottom: calc(var(--input-padding-y) / 3);
   font-size: 12px;
@@ -75,10 +74,10 @@ form.form-floating-labels .form-control {
 /* Fallback for Edge
 -------------------------------------------------- */
 @supports (-ms-ime-align: auto) {
-  .form-floating-labels .form-group > label {
+  .form-floating-labels .form-group > label, .form-floating-labels .form-group > .input-group > label {
     display: none;
   }
-  .form-floating-labels .form-group > input::-ms-input-placeholder {
+  .form-floating-labels .form-group > input::-ms-input-placeholder, .form-floating-labels .form-group > .input-group > input::-ms-input-placeholder {
     color: #777;
   }
 }
@@ -86,10 +85,10 @@ form.form-floating-labels .form-control {
 /* Fallback for IE
 -------------------------------------------------- */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  .form-floating-labels .form-group > label {
+  .form-floating-labels .form-group > label, .form-floating-labels .form-group > .input-group > label {
     display: none;
   }
-  .form-floating-labels .form-group > input:-ms-input-placeholder {
+  .form-floating-labels .form-group > input:-ms-input-placeholder, .form-floating-labels .form-group > .input-group > input:-ms-input-placeholder {
     color: #777;
   }
 }

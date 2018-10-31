@@ -149,14 +149,18 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                     $labelPosition = self::LABEL_APPEND;
                 }
 
-                switch ($labelPosition) {
-                    case self::LABEL_APPEND:
-                        $markup = $labelOpen . $elementString . $label . $labelClose;
-                        break;
-                    case self::LABEL_PREPEND:
-                    default:
-                        $markup = $labelOpen . $label . $elementString . $labelClose;
-                        break;
+                if ($formLayout === Form::LAYOUT_FLOATING_LABLES && stripos($elementString, '<label') !== FALSE) {
+                    $markup = $elementString;
+                } else {
+                    switch ($labelPosition) {
+                        case self::LABEL_APPEND:
+                            $markup = $labelOpen . $elementString . $label . $labelClose;
+                            break;
+                        case self::LABEL_PREPEND:
+                        default:
+                            $markup = $labelOpen . $label . $elementString . $labelClose;
+                            break;
+                    }
                 }
 
                 $markup = sprintf($formGroupHtml, $markup);

@@ -19,7 +19,7 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
         'checkbox',
         'file',
         'button',
-        'submit'
+        'submit',
     ];
 
     public function __construct()
@@ -61,8 +61,7 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
 
     public function renderInputGroup(ElementInterface $element, $elementMarkup)
     {
-        $newMarkup = '<div class="form-group">';
-        $newMarkup .= '<div class="input-group">';
+        $newMarkup = '<div class="input-group">';
 
         $addonPrepend = $element->getOption(static::ADDON_PREPEND);
         $addonAppend = $element->getOption(static::ADDON_APPEND);
@@ -76,13 +75,17 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
 
             $newMarkup .= $elementMarkup;
 
+            if ($element->getOption('formLayout') === Form::LAYOUT_FLOATING_LABLES) {
+                $label = $this->getView()->formLabel($element);
+                $newMarkup .= $label;
+            }
+
             // Addon append
             if ($addonAppend) {
                 $elementMarkupAppend = $this->renderAddons($addonAppend, $elementMarkup, static::ADDON_APPEND);
                 $newMarkup .= $elementMarkupAppend;
             }
 
-            $newMarkup .= '</div>';
             $newMarkup .= '</div>';
 
             $elementMarkup = $newMarkup;
