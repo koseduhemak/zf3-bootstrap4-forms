@@ -70,6 +70,13 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
 
         $elementString = $elementHelper->render($element);
 
+        // add form-group wrapper
+        if ($formLayout === Form::LAYOUT_HORIZONTAL) {
+            $formGroupHtml = '<div class="form-group row">%s</div>';
+        } else {
+            $formGroupHtml = '<div class="form-group">%s</div>';
+        }
+
         // hidden elements do not need a <label> -https://github.com/zendframework/zf2/issues/5607
         $type = $element->getAttribute('type');
         if (isset($label) && '' !== $label && $type !== 'hidden') {
@@ -85,13 +92,6 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
 
             if (empty($labelAttributes)) {
                 $labelAttributes = $this->labelAttributes;
-            }
-
-            // add form-group wrapper
-            if ($formLayout === Form::LAYOUT_HORIZONTAL) {
-                $formGroupHtml = '<div class="form-group row">%s</div>';
-            } else {
-                $formGroupHtml = '<div class="form-group">%s</div>';
             }
 
             // render errors
@@ -162,8 +162,6 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                             break;
                     }
                 }
-
-                $markup = sprintf($formGroupHtml, $markup);
             }
         } else {
             if ($this->renderErrors) {
@@ -172,6 +170,8 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                 $markup = $elementString;
             }
         }
+
+        $markup = sprintf($formGroupHtml, $markup);
 
         return $markup;
     }
