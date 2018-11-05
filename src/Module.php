@@ -2,9 +2,10 @@
 
 namespace Zf3Bootstrap4Forms;
 
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
-
-class Module implements ConfigProviderInterface, BootstrapListenerInterface
+class Module implements ConfigProviderInterface
 {
     const CONFIG_KEY = 'zf3-bootstrap4-forms';
 

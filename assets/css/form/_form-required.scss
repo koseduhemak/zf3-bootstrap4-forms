@@ -1,0 +1,31 @@
+form.display-required input.form-control, form.display-required textarea.form-control, form.display-required div.bootstrap-select button {
+  margin-left: 0.25rem;
+  min-width: 125px;
+  border-left: 3px solid;
+  border-radius: 5px;
+  transition: border-color .5s ease-out;
+}
+
+form.display-required div.bootstrap-select.form-control, form.display-required select.form-control {
+  margin-left: 2px !important;
+}
+
+.dropdown.bootstrap-select.form-control.required {
+  border-left: none !important;
+}
+
+form.display-required input.form-control:optional, form.display-required textarea.form-control:optional {
+  border-left-color: #999;
+}
+
+form.display-required input.form-control:required, form.display-required textarea.form-control:required, form.display-required div.bootstrap-select button.required {
+  border-left-color: #468847;
+}
+
+form.display-required input.form-control:invalid, form.display-required textarea.form-control:invalid, form.display-required div.bootstrap-select button.invalid, form.display-required select.form-control:invalid {
+  border-left-color: #ec1e23;
+}
+
+form.display-required div.invalid-feedback {
+  margin-left: 6px;
+}

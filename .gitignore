@@ -1,5 +1,6 @@
 # Composer files
 composer.phar
+composer.lock
 vendor/
 
 # Local configs
@@ -24,3 +25,4 @@ demos/
 extras/documentation
 
 .idea
+.php_cs.cache
