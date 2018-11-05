@@ -41,6 +41,7 @@ class FormErrors extends AbstractHelper
      */
     public function render(FormInterface $oForm, $sMessage, $bDismissable = false)
     {
+        // TODO: FIX
         $errorHtml = sprintf($this->messageOpenFormat, $sMessage);
         $sMessagesArray = [];
         foreach ($oForm->getMessages() as $fieldName => $sMessages) {
@@ -56,22 +57,13 @@ class FormErrors extends AbstractHelper
                 }
             }
         }
-        return $this->dangerAlert(
-            $errorHtml .
+
+        $html = sprintf('<div class="alert alert-danger">%s</div>', $errorHtml);
+
+        return sprintf($html,
             implode($this->messageSeparatorString, $sMessagesArray) .
             $this->messageCloseString,
             $bDismissable
         );
-    }
-
-    /**
-     * Creates and returns a "danger" alert.
-     * @param string $content
-     * @param boolean $bDismissable
-     * @return string
-     */
-    public function dangerAlert($content, $bDismissable = false)
-    {
-        return $this->getView()->alert($content, ['class' => 'alert-danger'], $bDismissable);
     }
 }
