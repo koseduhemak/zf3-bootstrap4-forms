@@ -20,7 +20,7 @@ class FormCheckbox extends \Zend\Form\View\Helper\FormCheckbox
             $labelAttributes = $element->getLabelAttributes();
             if (array_key_exists('class', $labelAttributes)) {
                 if (!preg_match('/(^|[^a-z]+)form-check-label($|[^a-z-]+)/i', $labelAttributes['class'])) {
-                    $labelAttributes['class'] = $labelAttributes['class'] . trim(' form-check-label');
+                    $labelAttributes['class'] = $labelAttributes['class'] . ' form-check-label';
                 }
             } else {
                 $labelAttributes['class'] = 'form-check-label';
