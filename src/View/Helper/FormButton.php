@@ -61,14 +61,12 @@ class FormButton extends \Zend\Form\View\Helper\FormButton
 
             switch ($position) {
                 case static::ICON_APPEND:
-                    $buttonContent = $buttonContent . $label;
+                    $buttonContent = trim($buttonContent) . ' ' . $label;
                     break;
                 case static::ICON_PREPREND:
                 default:
-                    $buttonContent = $label . $buttonContent;
+                    $buttonContent = trim($label) . ' ' . $buttonContent;
             }
-
-            return parent::render($element, $buttonContent);
         }
 
         return parent::render($element, $buttonContent);
