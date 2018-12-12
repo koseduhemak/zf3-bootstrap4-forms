@@ -12,7 +12,7 @@ class Form extends \Zend\Form\View\Helper\Form
     const LAYOUT_FLOATING_LABLES = 'form-floating-labels';
 
     protected $layouts = [
-        self::LAYOUT_DEFAULT
+        self::LAYOUT_DEFAULT,
         self::LAYOUT_FLOATING_LABLES,
         self::LAYOUT_HORIZONTAL
     ];
