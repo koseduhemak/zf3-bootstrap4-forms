@@ -95,7 +95,7 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
             }
 
             // render errors
-            if ($this->renderErrors && isset($elementErrors)) {
+            if ($this->renderErrors && isset($elementErrors) && !empty($elementErrors)) {
                 $formGroupHtml = sprintf($formGroupHtml, '%s'.$elementErrors);
             }
 
@@ -107,7 +107,7 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                 || $element instanceof Captcha
             ) {
                 $elementString = sprintf($formGroupHtml, $elementString);
-                $markup = sprintf(
+                return sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,
                     $elementString
@@ -164,7 +164,7 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
                 }
             }
         } else {
-            if ($this->renderErrors) {
+            if ($this->renderErrors && isset($elementErrors) && !empty($elementErrors)) {
                 $markup = $elementString . $elementErrors;
             } else {
                 $markup = $elementString;
