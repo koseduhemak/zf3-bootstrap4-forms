@@ -28,7 +28,8 @@ $jsLocale = strtolower(explode("_", $locale)[0]);
     </div>
     <?php echo $this->formInput($this->toElement); ?>
 </div>
-<?php/*
+<?php
+/*
 @TODO: HOW CAN WE MANAGE ASSETS PROPERLY?
 
 $this->headLink()->appendStylesheet('/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'); ?>
@@ -41,4 +42,5 @@ echo <<<JS
         $('.input-daterange').datepicker();
     });
 JS;
-$this->inlineScript()->captureEnd(); */?>
+$this->inlineScript()->captureEnd(); */
+?>
