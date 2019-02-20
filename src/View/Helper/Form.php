@@ -3,6 +3,7 @@
 namespace Zf3Bootstrap4Forms\View\Helper;
 
 use Zend\Form\Element;
+use Zend\Form\ElementInterface;
 use Zend\Form\FormInterface;
 
 class Form extends \Zend\Form\View\Helper\Form
@@ -33,13 +34,15 @@ class Form extends \Zend\Form\View\Helper\Form
             }
 
             // add class to form
-            if ($form->getAttributes('class')) {
+            /*if ($form->getAttributes('class')) {
                 if (!preg_match('/(^| )'.preg_quote($type).'($| )/', $form->getAttribute('class'))) {
                     $form->setAttribute('class', trim($type.' '.$form->getAttribute('class')));
                 }
             } else {
                 $form->setAttribute('class', $type);
-            }
+            }*/
+
+            $form = $this->addClass($form, $type);
 
             if ($type === static::LAYOUT_FLOATING_LABLES) {
                 $this->getView()->headLink()->prependStylesheet('/css/form/main.css');
@@ -49,4 +52,17 @@ class Form extends \Zend\Form\View\Helper\Form
         return parent::__invoke($form);
     }
 
+    protected function addClass(ElementInterface $element, $class)
+    {
+        // add class to form
+        if ($element->getAttributes('class')) {
+            if (!preg_match('/(^| )'.preg_quote($class).'($| )/', $element->getAttribute('class'))) {
+                $element->setAttribute('class', trim($class.' '.$element->getAttribute('class')));
+            }
+        } else {
+            $element->setAttribute('class', $class);
+        }
+
+        return $element;
+    }
 }
