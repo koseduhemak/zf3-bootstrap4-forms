@@ -41,9 +41,9 @@ class Form extends \Zend\Form\View\Helper\Form
                 $form->setAttribute('class', $type);
             }
 
-            if ($type === static::LAYOUT_FLOATING_LABLES) {
+            /*if ($type === static::LAYOUT_FLOATING_LABLES) {
                 $this->getView()->headLink()->prependStylesheet('/css/form/main.css');
-            }
+            }*/
         }
 
         return parent::__invoke($form);
