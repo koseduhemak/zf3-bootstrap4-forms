@@ -95,8 +95,12 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
             }
 
             // render errors
+            /*if ($this->renderErrors && isset($elementErrors) && !empty($elementErrors)) {
+                //$formGroupHtml = sprintf($formGroupHtml, '%s'.$elementErrors);
+            }*/
+
             if ($this->renderErrors && isset($elementErrors) && !empty($elementErrors)) {
-                $formGroupHtml = sprintf($formGroupHtml, '%s'.$elementErrors);
+                $elementString .= $elementErrors;
             }
 
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
