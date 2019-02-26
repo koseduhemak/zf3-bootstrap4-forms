@@ -74,7 +74,11 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
         if ($formLayout === Form::LAYOUT_HORIZONTAL) {
             $formGroupHtml = '<div class="form-group row">%s</div>';
         } else {
-            $formGroupHtml = '<div class="form-group">%s</div>';
+            if ($element->getOption('column-size') && is_null($formLayout) && ($element instanceof Button || $element instanceof Submit)) {
+                $formGroupHtml = '<div class="form-group col-' . $element->getOption('column-size') . '">%s</div>';
+            } else {
+                $formGroupHtml = '<div class="form-group">%s</div>';
+            }
         }
 
         // hidden elements do not need a <label> -https://github.com/zendframework/zf2/issues/5607
