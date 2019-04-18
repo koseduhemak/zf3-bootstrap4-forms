@@ -111,7 +111,7 @@ class FormElement extends \Zend\Form\View\Helper\FormElement
                     $addonMarkup[] = $this->render($addonCreatedElement);
                     break;
                 case is_string($addonElement):
-                    //$addonMarkup[] = ;
+                    $addonMarkup[] = sprintf('<div class="input-group-text">%s</div>', $addonElement);
                     break;
             }
         }
